@@ -1,17 +1,9 @@
 package dev.rm.model;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -25,31 +17,35 @@ public class VitalSigns {
     @Column(name = "id")
     private Long vitalSignsId;
 
-    @Column(name = "patient_id")
+    @Column(name = "patient_id", nullable = false)
     private Long patientId;
 
-    @Column(name = "temperature")
+    @Column(name = "temperature", nullable = false)
     private Double temperature;
 
-    @Column(name = "blood_pressure")
+    @Column(name = "blood_pressure", nullable = false)
     private String bloodPressure;
 
-    @Column(name = "heart_rate")
+    @Column(name = "heart_rate", nullable = false)
     private Integer heartRate;
 
-    @Column(name = "respiratory_rate")
+    @Column(name = "respiratory_rate", nullable = false)
     private Integer respiratoryRate;
 
-    @Column(name = "oxygen_saturation")
+    @Column(name = "oxygen_saturation", nullable = false)
     private Integer oxygenSaturation;
 
-    @Column(name = "glucose")
+    @Column(name = "glucose", nullable = false)
     private Integer glucose;
 
     @Column(name = "notes")
     private String notes;
 
-    @Column(name = "timestamp")
+    @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
 
+    @PrePersist
+    protected void onCreate() {
+        this.timestamp = LocalDateTime.now();
+    }
 }
