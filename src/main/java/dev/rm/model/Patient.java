@@ -13,6 +13,6 @@ public class Patient {
     private Long patientId;
     private String name;
     private String birthDate;
-    private String status;
+    private PatientStatus status;
 
 }
